@@ -1,9 +1,18 @@
 :root {
-  --background-color: #fafafa;
-  --text-color: #000000;
+  --background-color: #ecebe7;
+  --text-color: #443e3e;
+  --text-color-light: #443e3e2c;
+  --muted-text-color: #5d5b54;
+  --surface-color: rgba(202, 82, 82, 0.72);
+  --border-color: rgba(31, 31, 27, 0.12);
+  --accent-color: #bc4f37;
 }
 
 html[data-color-scheme="dark"] {
-  --background-color: #1e2124;
-  --text-color: #f5f5f5;
+  --background-color: #151617;
+  --text-color: #f3f0e8;
+  --muted-text-color: #bdb8ad;
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(243, 240, 232, 0.12);
+  --accent-color: #f08f67;
 }
