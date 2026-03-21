@@ -1,7 +1,7 @@
 @mixin four-by-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: repeat(2, 1fr);
 }
 
 @mixin five-by-grid {

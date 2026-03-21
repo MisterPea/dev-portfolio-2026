@@ -14,17 +14,6 @@ type HomePageProps = {
 export function HomePage({ site }: HomePageProps) {
   return (
     <SiteLayout site={site} currentPath="/">
-      {/* <section className="page-intro">
-        <h1 className="display-title">Building software with a designer's eye for rhythm, detail, and systems.</h1>
-        <p className="intro-copy">
-          I work across product thinking, front-end craft, and full-stack implementation.
-          This version of the site moves page content back into TSX so the design can use
-          <a className="inline-link" href="/projects/portfolio-engine/"> links</a>,
-          <span className="underline-copy"> underlined emphasis</span>, and custom compositions
-          without forcing everything through a rigid JSON schema.
-        </p>
-      </section> */}
-
       <section className="content-grid">
         <article className="content-panel">
           <SectionSpacer sectionTitle="Selected Systems" isLandingPage />
@@ -43,18 +32,18 @@ export function HomePage({ site }: HomePageProps) {
           </a>
           <SectionSpacer sectionTitle="Listening/Reading" isLandingPage />
           <div className="spotify-data"></div>
-          <a className="landing-content-anchor" href="#">
-            <p>I'm currently reading <span className="underline-text">Designing Data-Intensive Applications</span>, 2nd Edition by Martin Kleppmann, Chris Riccomini</p>
-          </a>
+          <span className="landing-reading-span">
+            <p>I'm currently reading <a href="#" rel="noreferrer" target="_blank">Designing Data-Intensive Applications</a>, 2nd Edition by Martin Kleppmann, Chris Riccomini</p>
+          </span>
           <SectionSpacer sectionTitle="Colophon" isLandingPage />
           <p className="landing-content-paragraph">
-            Site hand-coded using .tsx as a templating language, CSS/SCSS for styling, vanilla TypeScript for interactions, and 11ty to pull it all together. Typography is set in the <a href="https://vercel.com/font" target="_blank">Geist typeface</a>. Check out the <a href="#">repo for this site</a>.
+            Site hand-coded using .tsx as a templating language, CSS/SCSS for styling, vanilla TypeScript for interactions, and <a href="https://www.11ty.dev" rel="noreferrer" target="_blank">11ty</a> to pull it all together. Typography is set in the <a href="https://vercel.com/font" rel="noreferrer" target="_blank">Geist typeface</a>. Check out the <a href="https://github.com/MisterPea/dev-portfolio-2026" rel="noreferrer" target="_blank">repo for this site</a>.
           </p>
           <SectionSpacer sectionTitle="Contact" isLandingPage />
-          <a className="landing-content-anchor outbound-link" href="#"><p><span className="underline-text">GitHub</span></p></a>
-          <a className="landing-content-anchor outbound-link" href="#"><p><span className="underline-text">CodePen</span></p></a>
-          <a className="landing-content-anchor outbound-link" href="#"><p><span className="underline-text">LinkedIn</span></p></a>
-          <a className="landing-content-anchor outbound-link" href="#"><p><span className="underline-text">Email</span></p></a>
+          <a className="landing-content-anchor outbound-link" title="View my GitHub" href="https://github.com/MisterPea" rel="noreferrer" target="_blank"><p><span className="underline-text" >GitHub</span></p></a>
+          <a className="landing-content-anchor outbound-link" title="View my CodePens" href="https://codepen.io/misterpea" rel="noreferrer" target="_blank"><p><span className="underline-text" >CodePen</span></p></a>
+          <a className="landing-content-anchor outbound-link" title="View my LinkedIn" href="https://www.linkedin.com/in/perry-angelora/" rel="noreferrer" target="_blank"><p><span className="underline-text" >LinkedIn</span></p></a>
+          <button className="outbound-email" title="Say Hi!"><p><span className="underline-text" >Email</span></p></button>
         </article>
       </section>
     </SiteLayout>

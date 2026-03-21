@@ -1,4 +1,5 @@
 @use "./_mixins.scss" as *;
+@use "./dark-mode-toggle.scss" as *;
 
 html {
   box-sizing: border-box;
@@ -23,6 +24,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  transform: translateZ(0);
+  transition: background 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 body,
@@ -38,51 +41,47 @@ a {
 
 .__main {
   width: 100%;
-  max-width: 680px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 0 10px;
 }
 
-a {
+.outbound-email {
+  cursor: pointer;
+}
+
+.outbound-email.is-launching-email,
+.outbound-email.is-launching-email:hover,
+.outbound-email.is-launching-email:focus,
+.outbound-email.is-launching-email:active {
+  background: initial;
+  color: inherit;
+  transform: none;
+  box-shadow: none;
+}
+
+a,
+.outbound-email {
   position: relative;
-  &::after {
-    content: "";
-    inset: 0;
-    position: absolute;
-    background-image: repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 2.5px,
-      var(--text-color-light) 2.5px,
-      var(--text-color-light) 3px
-    );
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 300ms cubic-bezier(0.46, 0.03, 0.52, 0.96);
-  }
-  &:hover {
-    &::after {
-      opacity: 1;
+  @media (hover: hover) {
+    background-color: var(--highlight-color-trans);
+    border-radius: 4px;
+    position: relative;
+    transition: background-color 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    &:hover {
+      background-color: var(--highlight-color-opaque);
     }
   }
 }
 
-@keyframes move-grid {
-  from {
-    background-position: 0 0;
-    opacity: 0.2; /* Animating opacity alongside position */
-  }
-  to {
-    background-position: 5px 0;
-    opacity: 1;
-  }
+.site-main {
+  flex: 1;
 }
 
-.site-main {
-  // background-color: salmon;
-  flex: 1;
+.site-header {
+  position: relative;
 }
 
 footer {
@@ -96,48 +95,77 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  padding-top: 50px;
   p {
     height: fit-content;
     text-align: center;
   }
 }
 
-.site-header {
-  // display: flex;
-  // align-items: flex-start;
-  // justify-content: space-between;
-  // gap: 1.25rem;
-}
-
 .site-title-wrap {
-  @include four-by-grid;
   margin: 80px 0;
+  @include four-by-grid;
+  // background-color: darkcyan;
 }
 
 .site-title {
-  grid-row: 1 / 2;
   text-decoration: none;
-  font-size: 1.25rem;
-  line-height: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+
   letter-spacing: -2%;
   font-weight: 600;
   padding: 2px 0;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
 }
 
 .site-tagline {
-  grid-row: 2 / 3;
   margin: 0;
   font-size: 0.625rem;
   line-height: 0.725rem;
   text-transform: uppercase;
+  grid-column: 1 / 3;
 }
 
-.content-panel {
-  @include five-by-grid;
-  a,
-  p,
-  .spotify-data {
-    grid-column: 2 / -1;
+.color-scheme-toggle-wrap {
+  display: flex;
+  grid-column: -2 / -1;
+  grid-row: 1 / 3;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.color-scheme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0.5px solid var(--text-color-light);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-color);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+
+  svg {
+    display: block;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--highlight-color-opaque);
+      // transform: translateY(-1px);
+    }
   }
 }
 
@@ -145,42 +173,118 @@ footer {
 .site-main p a,
 .spotify-data a,
 .about-spotify_inline a {
-  position: relative;
-  font-size: 0.875rem;
   text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-decoration-inset: 10px;
+  text-underline-offset: 4px;
+  font-size: 0.875rem;
 }
 
 .landing-content-anchor,
 .landing-content-paragraph,
-.spotify-data {
-  margin-bottom: 20px;
-  margin-left: -10px;
-  padding: 10px;
-  font-size: 0.875rem;
-  font-weight: 400;
-  &.outbound-link {
-    width: fit-content;
-    margin-bottom: 5px;
-  }
-}
-
-.spotify-data {
+.spotify-data,
+.landing-reading-span,
+.outbound-email {
+  // background-color: teal;
+  width: fit-content;
+  background: none;
+  border: none;
+  color: var(--text-color);
   display: block;
-}
-
-.about-spotify_inline {
-  display: inline;
+  margin: 20px 0;
+  padding: 5px;
+  // padding-left: 15px;
+  font-size: 0.875rem;
+  // font-weight: 400;
+  font-weight: 300;
+  letter-spacing: 1%;
+  &.outbound-link {
+    margin-bottom: 15px;
+  }
 }
 
 // Section Spacer
 .section-spacer {
-  grid-column: 1 / -1;
   font-size: 0.75rem;
   text-transform: uppercase;
   font-weight: 600;
-  border-bottom: 0.5px solid #443e3e50;
-  margin-bottom: 20px;
+  border-bottom: 1px solid var(--section-spacer-line);
+  margin-bottom: 40px;
+  margin-top: 20px;
+  &:first-child {
+    margin-top: 0;
+  }
   &.landing {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 680px) {
+  .__main {
+    max-width: 680px;
+    padding: 0px;
+  }
+
+  footer {
+    padding-top: 150px;
+  }
+
+  .site-title-wrap {
+    margin: 80px 0;
+  }
+
+  .site-title {
+    grid-row: 1 / 2;
+    width: fit-content;
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+  }
+
+  .site-tagline {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .color-scheme-toggle {
+    margin: 0 0 0 auto;
+    align-self: start;
+  }
+
+  .section-spacer {
+    margin-top: 0;
+    &.landing {
+      margin-bottom: 30px;
+    }
+  }
+
+  .content-panel {
+    @include five-by-grid;
+    a,
+    p,
+    .spotify-data,
+    .landing-reading-span,
+    .outbound-email {
+      grid-column: 2 / -1;
+      display: inline;
+    }
+  }
+
+  .landing-content-anchor,
+  .landing-content-paragraph,
+  .spotify-data,
+  .landing-reading-span,
+  .outbound-email {
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 0;
+    margin-left: -10px;
+    padding: 10px;
+    &.outbound-link {
+      width: fit-content;
+    }
+  }
+
+  .section-spacer {
+    grid-column: 1 / -1;
   }
 }

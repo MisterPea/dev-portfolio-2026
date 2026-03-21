@@ -1,18 +1,41 @@
-:root {
+:root,
+html[data-color-scheme="light"] {
   --background-color: #ecebe7;
   --text-color: #443e3e;
-  --text-color-light: #443e3e2c;
+  --text-color-light: #443e3e56;
+  --section-spacer-line: #443e3e63;
   --muted-text-color: #5d5b54;
   --surface-color: rgba(202, 82, 82, 0.72);
   --border-color: rgba(31, 31, 27, 0.12);
   --accent-color: #bc4f37;
+  --highlight-color-opaque: #dddcd4;
+  --highlight-color-trans: #dddcd400;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme]) {
+    --background-color: #302f2f;
+    --text-color: #cdcac2;
+    --text-color-light: rgba(255, 255, 255, 0.45);
+    --section-spacer-line: #ffffff50;
+    --muted-text-color: #bdb8ad;
+    --surface-color: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(243, 240, 232, 0.12);
+    --accent-color: #f08f67;
+    --highlight-color-opaque: #4a4545;
+    --highlight-color-trans: #3c393900;
+  }
 }
 
 html[data-color-scheme="dark"] {
-  --background-color: #151617;
-  --text-color: #f3f0e8;
+  --background-color: #302f2f;
+  --text-color: #cdcac2;
+  --text-color-light: rgba(255, 255, 255, 0.45);
+  --section-spacer-line: #ffffff50;
   --muted-text-color: #bdb8ad;
   --surface-color: rgba(255, 255, 255, 0.05);
   --border-color: rgba(243, 240, 232, 0.12);
   --accent-color: #f08f67;
+  --highlight-color-opaque: #3c3939;
+  --highlight-color-trans: #3c393900;
 }

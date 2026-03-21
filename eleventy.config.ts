@@ -82,6 +82,25 @@ function escapeHtmlAttribute(value: string) {
     .replaceAll(">", "&gt;");
 }
 
+const colorSchemeBootstrapScript = `
+(() => {
+  const storageKey = "color-scheme";
+
+  try {
+    const storedPreference = window.localStorage.getItem(storageKey);
+
+    if (storedPreference === "light" || storedPreference === "dark") {
+      document.documentElement.dataset.colorScheme = storedPreference;
+      return;
+    }
+  } catch (_error) {
+    // Ignore storage access issues and fall back to the system preference.
+  }
+
+  document.documentElement.removeAttribute("data-color-scheme");
+})();
+`.trim();
+
 export default function (eleventyConfig: any) {
   eleventyConfig.addTemplateFormats(TEMPLATE_FORMATS);
   eleventyConfig.addExtension(TEMPLATE_FORMATS, {
@@ -116,6 +135,7 @@ export default function (eleventyConfig: any) {
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <title>${escapeHtmlAttribute(pageTitle)}</title>
               ${metaDescription ? `<meta name="description" content="${escapeHtmlAttribute(metaDescription)}" />` : ""}
+              <script>${colorSchemeBootstrapScript}</script>
               <link rel="preconnect" href="https://fonts.googleapis.com">
               <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
               <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
