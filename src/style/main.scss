@@ -1,5 +1,6 @@
 @use "./_mixins.scss" as *;
 @use "./_dark-mode-toggle.scss" as *;
+@use "./_page-transitions.scss" as *;
 
 html {
   box-sizing: border-box;
@@ -317,7 +318,9 @@ footer {
 }
 
 .spotify-data {
-  transition: opacity 180ms ease, transform 180ms ease;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
 
   &.is-pending {
     opacity: 0.72;
@@ -394,7 +397,6 @@ footer {
     margin-top: 20px;
     font-size: 0.875rem;
   }
-
 }
 
 // *********************** Project Content *********************** //

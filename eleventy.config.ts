@@ -179,9 +179,15 @@ export default function (eleventyConfig: any) {
             <head>
               <meta charset="utf-8" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <meta name="view-transition" content="same-origin" />
               <title>${escapeHtmlAttribute(pageTitle)}</title>
               ${metaDescription ? `<meta name="description" content="${escapeHtmlAttribute(metaDescription)}" />` : ""}
               <script>${colorSchemeBootstrapScript}</script>
+              <script
+                defer
+                src="https://cloud.umami.is/script.js"
+                data-website-id="07d06a16-f4e2-4a87-b172-795bd49a620d"
+              ></script>
               <link rel="preconnect" href="https://fonts.googleapis.com">
               <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
               <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">

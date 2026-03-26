@@ -3,7 +3,7 @@ import spotifyListening from "./spotifyListening.ts";
 
 const COLOR_SCHEME_STORAGE_KEY = "color-scheme";
 const STICKY_TAGLINE_HIDDEN_CLASS = "is-sticky-hidden";
-const STICKY_TAGLINE_BUFFER_MS = 125;
+const STICKY_TAGLINE_BUFFER_MS = 50;
 const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 initButtonEmail();

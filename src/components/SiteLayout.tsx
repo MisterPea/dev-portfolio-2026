@@ -23,7 +23,10 @@ export default function SiteLayout({
         navigation={site.navigation}
         currentSlug={currentPath}
       />
-      <main className="site-main">{children}</main>
+      {/* Keep the transition scoped to page content so the header/footer read as a stable shell. */}
+      <main className="site-main" style={{ viewTransitionName: "site-main" }}>
+        {children}
+      </main>
       <Footer text={site.footerText} />
     </div>
   );
