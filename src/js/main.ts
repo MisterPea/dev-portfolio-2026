@@ -6,7 +6,33 @@ const STICKY_TAGLINE_HIDDEN_CLASS = "is-sticky-hidden";
 const STICKY_TAGLINE_BUFFER_MS = 50;
 const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-initButtonEmail();
+function logConsoleGreeting() {
+  console.log(
+    `%c    Thanks for checking me out!
+    Interested in working together?
+    Let's connect:
+    Say hello via LinkedIn or Email (on the site footer)
+
+    • https://github.com/MisterPea
+    • https://www.linkedin.com/in/perry-angelora/
+    %c
+    .................................
+    ...............___...............   
+    ............../  /\\..............  
+    ............./  /::\\............. 
+    ............/  /:/\\:\\............
+    .........../  /:/~/:/............
+    ........../__/:/ /:/ ............
+    ..........\\  \\:\\/:/..............  
+    ...........\\  \\::/...............   
+    ............\\  \\:\\...............   
+    .............\\  \\:\\..............  
+    ..............\\__\\/..............  
+    .................................`,
+    "color: rgb(110, 133, 159); font-size: 12px;",
+    "color: rgb(110, 133, 159); font-size: 12px; font-family: monospace, monospace-ui;",
+  );
+}
 
 function getStoredColorScheme() {
   try {
@@ -152,6 +178,16 @@ function initializeStickyTagline() {
   queueStickyTaglineUpdate();
 }
 
-initializeColorSchemeToggle();
-initializeStickyTagline();
-void spotifyListening();
+function initializeSite() {
+  initButtonEmail();
+  initializeColorSchemeToggle();
+  initializeStickyTagline();
+  logConsoleGreeting();
+  void spotifyListening();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeSite, { once: true });
+} else {
+  initializeSite();
+}
