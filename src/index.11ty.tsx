@@ -34,7 +34,11 @@ export function HomePage({ site }: HomePageProps) {
             </a>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Listening/Reading" isLandingPage >
-            <div className="spotify-data landing-content"></div>
+            <div
+              className="spotify-data landing-content"
+              aria-atomic="true"
+              aria-live="polite"
+            ></div>
             <span className="landing-content">
               <p>I'm currently reading <a href="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" rel="noreferrer" target="_blank">Designing Data-Intensive Applications</a>, 2nd Edition by Martin Kleppmann, Chris Riccomini</p>
             </span>
@@ -48,7 +52,12 @@ export function HomePage({ site }: HomePageProps) {
             <a className="landing-content outbound-link" title="View my GitHub" href="https://github.com/MisterPea" rel="noreferrer" target="_blank"><p><span className="underline-text" >GitHub</span></p></a>
             <a className="landing-content outbound-link" title="View my CodePens" href="https://codepen.io/misterpea" rel="noreferrer" target="_blank"><p><span className="underline-text" >CodePen</span></p></a>
             <a className="landing-content outbound-link" title="View my LinkedIn" href="https://www.linkedin.com/in/perry-angelora/" rel="noreferrer" target="_blank"><p><span className="underline-text" >LinkedIn</span></p></a>
-            <button className="landing-content outbound-email" title="Say Hi!"><p><span className="underline-text" >Email</span></p></button>
+            <button
+              className="landing-content outbound-email"
+              title="Say Hi!"
+              type="button"
+              aria-label="Compose an email to Perry Angelora"
+            ><p><span className="underline-text" >Email</span></p></button>
           </SectionSpacer>
         </article>
       </section>

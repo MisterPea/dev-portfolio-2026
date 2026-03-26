@@ -108,7 +108,7 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
               <>This centralized configuration also allows us to implement a rate-limited queue so as not to run afoul of Schwab's rate limits.</>,
             ]}
           />
-          <div className="svg-chart">
+          <div className="svg-chart" role="img" aria-label="schwab-node request and authentication flow diagram">
             <Icon.schwabFlowchart />
           </div>
           <ListItemBlock
@@ -125,7 +125,7 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
               <>ZeroMQ is language agnostic—you can consume the stream with interfaces written in a number of languages.</>,
             ]}
           />
-          <div className="svg-chart">
+          <div className="svg-chart" role="img" aria-label="schwab-node streaming and ZeroMQ flow diagram">
             <Icon.schwabFlowchartTwo />
           </div>
         </div>

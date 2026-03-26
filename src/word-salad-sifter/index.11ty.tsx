@@ -80,6 +80,7 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
           />
           <InsertVideo
             filename="word_salad_sifter-in_progress.mp4"
+            ariaLabel="Screen capture demonstrating Word Salad Sifter parsing a job posting into structured output"
           />
           <ListItemBlock
             title="3. Document Generation"
@@ -107,7 +108,7 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
               <>Ensures valid API key and login exists.</>
             ]}
           />
-          <div className="svg-chart">
+          <div className="svg-chart" role="img" aria-label="Word Salad Sifter extension layer architecture diagram">
             <Icon.wordSaladFlowOne />
           </div>
           <p className="project-text-single">
@@ -125,7 +126,7 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
               <>Google APIs duplicate the user's resume and append structured information into a standardized table.</>
             ]}
           />
-          <div className="svg-chart">
+          <div className="svg-chart" role="img" aria-label="Word Salad Sifter document integration architecture diagram">
             <Icon.wordSaladFlowTwo />
           </div>
           <p className="project-text-single">

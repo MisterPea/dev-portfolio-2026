@@ -9,6 +9,7 @@ const OUTPUT_URL_BASE = "/assets/videos";
 const DEFAULT_VIDEO_ASPECT_RATIO = "16 / 9";
 
 type VideoOptions = {
+  ariaLabel?: string;
   aspectRatio?: string;
   autoPlay?: boolean;
   controls?: boolean;
@@ -81,6 +82,7 @@ export default async function embedVideo(
 ): Promise<JSX.Element> {
   const preparedVideo = await copyVideoToOutput(videoPath);
   const {
+    ariaLabel,
     aspectRatio = DEFAULT_VIDEO_ASPECT_RATIO,
     autoPlay = true,
     controls = false,
@@ -98,6 +100,7 @@ export default async function embedVideo(
       <div className="video-placeholder" aria-hidden="true" />
       <video
         autoPlay={autoPlay}
+        aria-label={ariaLabel}
         controls={controls}
         loop={loop}
         muted={muted}
