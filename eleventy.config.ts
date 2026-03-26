@@ -10,6 +10,23 @@ import embedVideo from "./utilities/videoProcessor.tsx";
 
 const TEMPLATE_FORMATS = ["11ty.jsx", "11ty.ts", "11ty.tsx"];
 const SCRIPT_EXTENSIONS = [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"];
+const ROOT_STATIC_ASSETS = [
+  "src/apple-touch-icon.png",
+  "src/favicon-96x96.png",
+  "src/favicon.ico",
+  "src/favicon.svg",
+  "src/og-image.png",
+  "src/og-image.svg",
+  "src/site.webmanifest",
+  "src/web-app-manifest-192x192.png",
+  "src/web-app-manifest-512x512.png",
+];
+const FONT_ASSETS = [
+  "fonts/Geist-Light.woff2",
+  "fonts/Geist-Regular.woff2",
+  "fonts/Geist-Medium.woff2",
+  "fonts/Geist-SemiBold.woff2",
+];
 const IMPORT_PATTERN =
   /(?:import|export)\s+(?:type\s+)?(?:[^"'`]*?\s+from\s+)?["']([^"'`]+)["']/g;
 
@@ -117,6 +134,14 @@ const colorSchemeBootstrapScript = `
 
 // Takes a specified image and converts it to a webp.
 export default function (eleventyConfig: any) {
+  for (const fontPath of FONT_ASSETS) {
+    eleventyConfig.addPassthroughCopy(fontPath);
+  }
+
+  for (const assetPath of ROOT_STATIC_ASSETS) {
+    eleventyConfig.addPassthroughCopy(assetPath);
+  }
+
   eleventyConfig.addAsyncShortcode(
     "getImageLinks",
     async function (
@@ -162,6 +187,14 @@ export default function (eleventyConfig: any) {
 
       return async function (data: any) {
         const content = await this.defaultRenderer(data);
+        const outputPath = data.page?.outputPath as string | undefined;
+
+        if (outputPath && !outputPath.endsWith(".html")) {
+          return typeof content === "string"
+            ? content
+            : renderToStaticMarkupAsync(content);
+        }
+
         const result = await renderToStaticMarkupAsync(content);
         const siteTitle = data.site?.title;
         const seoTitle = data.seo?.title ?? data.title;
@@ -172,6 +205,11 @@ export default function (eleventyConfig: any) {
           data.seo?.description ??
           data.description ??
           data.site?.description;
+        const siteUrl = data.site?.url?.replace(/\/$/, "") ?? "";
+        const pageUrl = data.page?.url ?? "/";
+        const canonicalUrl = `${siteUrl}${pageUrl}`;
+        const socialImageUrl = `${siteUrl}/og-image.png`;
+        const socialImageAlt = `${siteTitle ?? "Portfolio"} preview card`;
 
         return `
         <!DOCTYPE html>
@@ -182,15 +220,35 @@ export default function (eleventyConfig: any) {
               <meta name="view-transition" content="same-origin" />
               <title>${escapeHtmlAttribute(pageTitle)}</title>
               ${metaDescription ? `<meta name="description" content="${escapeHtmlAttribute(metaDescription)}" />` : ""}
+              <link rel="canonical" href="${escapeHtmlAttribute(canonicalUrl)}" />
+              <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+              <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+              <link rel="shortcut icon" href="/favicon.ico" />
+              <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+              <meta name="apple-mobile-web-app-title" content="misterpea.me" />
+              <meta name="theme-color" content="#ecebe7" media="(prefers-color-scheme: light)" />
+              <meta name="theme-color" content="#302f2f" media="(prefers-color-scheme: dark)" />
+              <link rel="manifest" href="/site.webmanifest" />
+              <meta property="og:type" content="website" />
+              <meta property="og:site_name" content="${escapeHtmlAttribute(siteTitle ?? "Portfolio")}" />
+              <meta property="og:title" content="${escapeHtmlAttribute(pageTitle)}" />
+              ${metaDescription ? `<meta property="og:description" content="${escapeHtmlAttribute(metaDescription)}" />` : ""}
+              <meta property="og:url" content="${escapeHtmlAttribute(canonicalUrl)}" />
+              <meta property="og:image" content="${escapeHtmlAttribute(socialImageUrl)}" />
+              <meta property="og:image:alt" content="${escapeHtmlAttribute(socialImageAlt)}" />
+              <meta property="og:image:width" content="1200" />
+              <meta property="og:image:height" content="630" />
+              <meta name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:title" content="${escapeHtmlAttribute(pageTitle)}" />
+              ${metaDescription ? `<meta name="twitter:description" content="${escapeHtmlAttribute(metaDescription)}" />` : ""}
+              <meta name="twitter:image" content="${escapeHtmlAttribute(socialImageUrl)}" />
+              <meta name="twitter:image:alt" content="${escapeHtmlAttribute(socialImageAlt)}" />
               <script>${colorSchemeBootstrapScript}</script>
               <script
                 defer
                 src="https://cloud.umami.is/script.js"
                 data-website-id="07d06a16-f4e2-4a87-b172-795bd49a620d"
               ></script>
-              <link rel="preconnect" href="https://fonts.googleapis.com">
-              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-              <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
               <link rel="stylesheet" href="/style/variables.css" />
               <link rel="stylesheet" href="/style/main.css" />
               <script src="/js/main.js" defer></script>

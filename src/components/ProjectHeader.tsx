@@ -31,8 +31,14 @@ export default function ProjectHeader({
       <h2 className="project-header--title">{title}</h2>
       <div className="project-header--links">
         {links.map((link) => (
-          <a href={link.href} key={link.href} rel="noreferrer" target="_blank">
-            {link.icon}
+          <a
+            href={link.href}
+            key={link.href}
+            rel="noreferrer"
+            target="_blank"
+            aria-label={`${link.label} (opens in a new tab)`}
+          >
+            <span aria-hidden="true">{link.icon}</span>
             <p>{link.label}</p>
           </a>
         ))}

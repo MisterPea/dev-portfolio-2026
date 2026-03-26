@@ -1,0 +1,40 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="145" y1="82" x2="1068" y2="571" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1E9DE"/>
+      <stop offset="1" stop-color="#E3D5C1"/>
+    </linearGradient>
+    <linearGradient id="accent-gradient" x1="240" y1="114" x2="1012" y2="571" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BC4F37"/>
+      <stop offset="1" stop-color="#F08F67"/>
+    </linearGradient>
+    <filter id="blur-glow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="48"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="#ECEBE7"/>
+  <rect x="26" y="26" width="1148" height="578" rx="34" fill="url(#bg-gradient)"/>
+  <g opacity="0.8" filter="url(#blur-glow)">
+    <circle cx="954" cy="145" r="116" fill="#F08F67"/>
+    <circle cx="262" cy="506" r="104" fill="#BC4F37"/>
+  </g>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="#302F2F"/>
+  <rect x="103" y="103" width="994" height="424" rx="22" fill="#373434"/>
+
+  <path d="M103 453C189 405 278 393 366 417C442 438 501 492 580 505C706 526 774 447 863 405C938 370 1019 364 1097 391V527H103V453Z" fill="url(#accent-gradient)" opacity="0.92"/>
+  <path d="M100 451C188 400 280 388 369 411C445 431 504 483 582 496C706 517 776 439 864 397C939 362 1020 356 1100 384" stroke="#F5E9D6" stroke-width="3" stroke-linecap="round" opacity="0.78"/>
+
+  <circle cx="136" cy="136" r="11" fill="#F08F67"/>
+  <circle cx="172" cy="136" r="11" fill="#DDDCD4"/>
+  <circle cx="208" cy="136" r="11" fill="#6C6666"/>
+
+  <text x="102" y="212" fill="#F3EEE6" font-family="Geist, Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="0.26em">MISTERPEA.ME</text>
+  <text x="102" y="302" fill="#F7F2EA" font-family="Geist, Arial, sans-serif" font-size="74" font-weight="700">Perry Angelora</text>
+  <text x="102" y="364" fill="#CDCAC2" font-family="Geist, Arial, sans-serif" font-size="32" font-weight="500">Design-Literate Software Developer</text>
+
+  <rect x="102" y="406" width="248" height="52" rx="26" fill="#F1E9DE" fill-opacity="0.12" stroke="#F3EEE6" stroke-opacity="0.22"/>
+  <text x="132" y="440" fill="#F6EEE4" font-family="Geist, Arial, sans-serif" font-size="22" font-weight="600">Systems + Tools + UI</text>
+
+  <text x="102" y="560" fill="#D8D1C7" font-family="Geist, Arial, sans-serif" font-size="24" font-weight="500">TypeScript, Eleventy, front-end craft, and product-minded engineering</text>
+</svg>

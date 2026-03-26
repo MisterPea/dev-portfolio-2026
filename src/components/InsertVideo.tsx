@@ -2,6 +2,7 @@ import embedVideo from "../../utilities/videoProcessor.tsx";
 import type { JSX } from "react/jsx-runtime";
 
 type InsertVideoProps = {
+  ariaLabel?: string;
   aspectRatio?: string;
   autoPlay?: boolean;
   class?: string;
@@ -15,6 +16,7 @@ type InsertVideoProps = {
 };
 
 export default async function InsertVideo({
+  ariaLabel,
   aspectRatio,
   autoPlay,
   class: classProp,
@@ -30,6 +32,7 @@ export default async function InsertVideo({
     filename,
     className ?? classProp ?? "",
     {
+      ariaLabel,
       aspectRatio,
       autoPlay,
       controls,

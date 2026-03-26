@@ -83,7 +83,7 @@ export function SecInsidersPage({ site }: SecInsidersPageProps) {
 
       <SectionSpacer sectionTitle="Architecture" >
         <div className="project-section-wrapper">
-          <div className="svg-chart">
+          <div className="svg-chart" role="img" aria-label="SEC Insider Clusters pipeline architecture diagram">
             <h3 className="underline-text">Pipeline Diagram</h3>
             <Icon.secPipeline />
           </div>

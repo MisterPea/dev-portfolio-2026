@@ -5,6 +5,7 @@ export type SiteNavItem = {
 
 export type SiteData = {
   title: string;
+  url: string;
   description?: string;
   tagline?: string;
   footerText?: string;

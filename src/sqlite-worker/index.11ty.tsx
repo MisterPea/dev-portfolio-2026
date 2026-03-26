@@ -65,7 +65,7 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
               <>Response comes back through defined interfaces</>,
             ]}
           />
-          <div className="svg-chart">
+          <div className="svg-chart" role="img" aria-label="sqlite-worker system flow diagram">
             <Icon.sqliteFlow />
           </div>
         </div>
