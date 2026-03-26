@@ -2,8 +2,11 @@ import "tsx/esm";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import type { ReactNode } from "react";
 import * as sass from "sass";
-import { renderToStaticMarkup } from "react-dom/server";
+import { prerenderToNodeStream } from "react-dom/static";
+import createResponsiveImages from "./utilities/imageProcessor.tsx";
+import embedVideo from "./utilities/videoProcessor.tsx";
 
 const TEMPLATE_FORMATS = ["11ty.jsx", "11ty.ts", "11ty.tsx"];
 const SCRIPT_EXTENSIONS = [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"];
@@ -82,6 +85,17 @@ function escapeHtmlAttribute(value: string) {
     .replaceAll(">", "&gt;");
 }
 
+async function renderToStaticMarkupAsync(content: ReactNode) {
+  const { prelude } = await prerenderToNodeStream(content);
+  let html = "";
+
+  for await (const chunk of prelude) {
+    html += chunk.toString();
+  }
+
+  return html;
+}
+
 const colorSchemeBootstrapScript = `
 (() => {
   const storageKey = "color-scheme";
@@ -101,7 +115,39 @@ const colorSchemeBootstrapScript = `
 })();
 `.trim();
 
+// Takes a specified image and converts it to a webp.
 export default function (eleventyConfig: any) {
+  eleventyConfig.addAsyncShortcode(
+    "getImageLinks",
+    async function (
+      src: string,
+      className: string,
+      alt: string,
+      imageWidth = "100vw",
+    ) {
+      const imageMarkup = await createResponsiveImages(
+        src,
+        className,
+        alt,
+        imageWidth,
+      );
+
+      return renderToStaticMarkupAsync(imageMarkup);
+    },
+  );
+
+  eleventyConfig.addAsyncShortcode(
+    "getVideoEmbed",
+    async function (
+      src: string,
+      className = "",
+      options = {},
+    ) {
+      const videoMarkup = await embedVideo(src, className, options);
+      return renderToStaticMarkupAsync(videoMarkup);
+    },
+  );
+
   eleventyConfig.addTemplateFormats(TEMPLATE_FORMATS);
   eleventyConfig.addExtension(TEMPLATE_FORMATS, {
     key: "11ty.js",
@@ -116,7 +162,7 @@ export default function (eleventyConfig: any) {
 
       return async function (data: any) {
         const content = await this.defaultRenderer(data);
-        const result = renderToStaticMarkup(content);
+        const result = await renderToStaticMarkupAsync(content);
         const siteTitle = data.site?.title;
         const seoTitle = data.seo?.title ?? data.title;
         const pageTitle = seoTitle && siteTitle

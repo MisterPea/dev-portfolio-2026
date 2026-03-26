@@ -2,6 +2,8 @@ import { initButtonEmail } from "./renderEmail.ts";
 import spotifyListening from "./spotifyListening.ts";
 
 const COLOR_SCHEME_STORAGE_KEY = "color-scheme";
+const STICKY_TAGLINE_HIDDEN_CLASS = "is-sticky-hidden";
+const STICKY_TAGLINE_BUFFER_MS = 125;
 const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 initButtonEmail();
@@ -35,6 +37,7 @@ function applyColorScheme(colorScheme: "light" | "dark" | null) {
 }
 
 function updateColorSchemeToggle() {
+
   const toggle = document.querySelector<HTMLButtonElement>("[data-color-scheme-toggle]");
 
   if (!toggle) {
@@ -83,54 +86,72 @@ function initializeColorSchemeToggle() {
   });
 }
 
-// type LambdaPayload =
-//   | string
-//   | {
-//     message?: string;
-//     content?: string;
-//     text?: string;
-//   };
+// Classlist manipulation for fade in/out of site tag
+function initializeStickyTagline() {
+  const tagline = document.querySelector<HTMLElement>(".site-tagline");
+  const siteTitle = document.querySelector<HTMLElement>(".site-title");
+  const siteMain = document.querySelector<HTMLElement>(".site-main");
+  const themeToggle = document.querySelector<HTMLElement>(".color-scheme-toggle");
 
-// async function hydrateLambdaWidgets() {
-//   const widgets = document.querySelectorAll<HTMLElement>("[data-lambda-widget]");
+  if (!tagline || !siteMain || !siteTitle || !themeToggle) {
+    return;
+  }
+  let hideTimeoutId: number | null = null;
 
-//   await Promise.all(
-//     [...widgets].map(async (widget) => {
-//       const endpoint = widget.dataset.endpoint;
-//       const fallback = widget.dataset.fallback ?? "This live module is unavailable.";
-//       const statusNode = widget.querySelector<HTMLElement>("[data-lambda-status]");
+  const clearHideTimeout = () => {
+    if (hideTimeoutId === null) {
+      return;
+    }
 
-//       if (!endpoint || !statusNode) {
-//         return;
-//       }
+    window.clearTimeout(hideTimeoutId);
+    hideTimeoutId = null;
+  };
 
-//       try {
-//         const response = await fetch(endpoint, {
-//           headers: {
-//             Accept: "application/json",
-//           },
-//         });
+  let frameId: number | null = null;
 
-//         if (!response.ok) {
-//           throw new Error(`Request failed with status ${response.status}`);
-//         }
+  const updateStickyTagline = () => {
+    frameId = null;
 
-//         const payload = await response.json() as LambdaPayload;
+    const shouldHide = siteMain.getBoundingClientRect().top <= 80;
 
-//         if (typeof payload === "string") {
-//           statusNode.textContent = payload;
-//           return;
-//         }
+    if (!shouldHide) {
+      clearHideTimeout();
+      tagline.classList.remove(STICKY_TAGLINE_HIDDEN_CLASS);
+      siteTitle.classList.remove(STICKY_TAGLINE_HIDDEN_CLASS);
+      themeToggle.classList.remove(STICKY_TAGLINE_HIDDEN_CLASS);
+      return;
+    }
 
-//         statusNode.textContent = payload.message ?? payload.content ?? payload.text ?? fallback;
-//       } catch (_error) {
-//         statusNode.textContent = fallback;
-//         widget.dataset.state = "error";
-//       }
-//     }),
-//   );
-// }
+    if (
+      hideTimeoutId !== null ||
+      tagline.classList.contains(STICKY_TAGLINE_HIDDEN_CLASS) ||
+      siteTitle.classList.contains(STICKY_TAGLINE_HIDDEN_CLASS) ||
+      themeToggle.classList.contains(STICKY_TAGLINE_HIDDEN_CLASS)
+    ) {
+      return;
+    }
 
-// void hydrateLambdaWidgets();
+    hideTimeoutId = window.setTimeout(() => {
+      tagline.classList.add(STICKY_TAGLINE_HIDDEN_CLASS);
+      siteTitle.classList.add(STICKY_TAGLINE_HIDDEN_CLASS);
+      themeToggle.classList.add(STICKY_TAGLINE_HIDDEN_CLASS);
+      hideTimeoutId = null;
+    }, STICKY_TAGLINE_BUFFER_MS);
+  };
+
+  const queueStickyTaglineUpdate = () => {
+    if (frameId !== null) {
+      return;
+    }
+
+    frameId = window.requestAnimationFrame(updateStickyTagline);
+  };
+
+  window.addEventListener("scroll", queueStickyTaglineUpdate, { passive: true });
+  window.addEventListener("resize", queueStickyTaglineUpdate);
+  queueStickyTaglineUpdate();
+}
+
 initializeColorSchemeToggle();
+initializeStickyTagline();
 void spotifyListening();
