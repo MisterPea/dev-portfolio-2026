@@ -5,8 +5,8 @@
 @supports (view-transition-name: none) {
   ::view-transition-group(root),
   ::view-transition-image-pair(root) {
-    animation-duration: 220ms;
-    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);;
   }
 
   ::view-transition-old(root),
@@ -16,14 +16,14 @@
   }
 
   ::view-transition-group(site-main) {
-    animation-duration: 220ms;
-    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);;
   }
 
   ::view-transition-old(site-main),
   ::view-transition-new(site-main) {
-    animation-duration: 220ms;
-    animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    animation-duration: 320ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);;
     background: var(--background-color);
   }
 

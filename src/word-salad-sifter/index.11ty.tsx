@@ -52,11 +52,6 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
           <p className="project-text-single">
             The goal is not to generate application materials automatically, but to provide a structured framework that helps applicants craft their own targeted, human responses (see example below).
           </p>
-          <InsertImage
-            filename="word_salad_sifter-resume_sample.png"
-            class="project-content--image"
-            alt="Example output from a parsed job post"
-          />
         </div>
       </SectionSpacer>
 
@@ -90,8 +85,13 @@ export function SecInsidersPage({ site }: SchwabNodeProps) {
               <>Google Docs API allows insertion of structured output</>,
             ]}
           />
+          <InsertImage
+            filename="word_salad_sifter-resume_sample.png"
+            class="project-content--image"
+            alt="Example output from a parsed job post"
+          />
           <p className="project-text-single">
-            The result is a consistent reference table embedded directly in a working resume document.
+            The result is a consistent reference table (above) embedded directly in a working resume document.
           </p>
         </div>
       </SectionSpacer>
