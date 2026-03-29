@@ -60,6 +60,7 @@ body {
   text-rendering: optimizeLegibility;
   transform: translateZ(0);
   transition: background 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  scroll-behavior: smooth;
 }
 
 body,
