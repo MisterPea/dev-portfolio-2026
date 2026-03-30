@@ -45,7 +45,7 @@ export function HomePage({ site }: HomePageProps) {
           </SectionSpacer>
           <SectionSpacer sectionTitle="Colophon" isLandingPage >
             <p className="landing-content">
-              Site coded by hand with a judicious use of coding agents. Using .tsx as a templating language, CSS/SCSS for styling, vanilla TypeScript for interactions, and <a href="https://www.11ty.dev" rel="noreferrer" target="_blank">11ty</a> to pull it all together. Typography is set in the <a href="https://vercel.com/font" rel="noreferrer" target="_blank">Geist typeface</a>. Check out the <a href="https://github.com/MisterPea/dev-portfolio-2026" rel="noreferrer" target="_blank">repo for this site.</a>
+              Built with TSX templates, SCSS, vanilla TypeScript, and <a href="https://www.11ty.dev" rel="noreferrer" target="_blank">11ty</a>. Typography in <a href="https://vercel.com/font" rel="noreferrer" target="_blank">Geist</a>. Check out the <a href="https://github.com/MisterPea/dev-portfolio-2026" rel="noreferrer" target="_blank">repo here</a>. Coded by hand; AI used selectively for sanity-checking, test development, and bug hunting. All architecture and final decisions are mine.
             </p>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Links" isLandingPage >
