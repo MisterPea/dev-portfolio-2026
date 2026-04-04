@@ -28,8 +28,8 @@ export function SecInsidersPage({ site }: SecInsidersPageProps) {
   return (
     <SiteLayout site={site} currentPath="/sec-insider-cluster/">
       <ProjectHeader
-        title="SEC Insider Clusters"
-        description={<>SEC Insiders is an automated pipeline for detecting clusters of insider buying and selling of securities. The system monitors Form 4 ownership disclosures and converts raw XML into structured transaction-level data. Then, downstream analysis can isolate discretionary activity from routine or preordained trades.</>}
+        title="SEC Insider Trade Clusters"
+        description={<>SEC Insider Trade Clusters is an automated pipeline for detecting clusters of insider buying and selling of securities. The system monitors Form 4 ownership disclosures and converts raw XML into structured transaction-level data. Then, downstream analysis can isolate discretionary activity from routine or preordained trades.</>}
         metaItems={[
           { label: "Status", value: "Active development" },
           { label: "Stack", value: "TypeScript • Node.js • SQLite • SEC EDGAR APIs" },
