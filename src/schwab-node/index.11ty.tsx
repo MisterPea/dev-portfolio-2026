@@ -8,7 +8,7 @@ import type { SiteData } from "../types/site.ts";
 export const data = {
   title: "schwab-node",
   description:
-    "A project page for a TypeScript SDK for authenticated market data and live streaming with Schwab APIs.",
+    "Project page for schwab-node, a TypeScript SDK for authenticated market data and live streaming with Schwab APIs.",
 };
 
 type SchwabNodeProps = {

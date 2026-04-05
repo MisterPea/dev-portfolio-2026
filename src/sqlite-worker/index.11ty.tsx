@@ -8,7 +8,7 @@ import type { SiteData } from "../types/site.ts";
 export const data = {
   title: "sqlite-worker",
   description:
-    "A project page for a concurrency-safe boundary implementing better-sqlite3, safely isolating database operations to a background thread in Node.js applications.",
+    "Project page for a SQLite+Worker. A concurrency-safe boundary implementing better-sqlite3, safely isolating database operations to a background thread in Node.js applications.",
 };
 
 type SchwabNodeProps = {

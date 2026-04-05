@@ -7,9 +7,9 @@ import SiteLayout from "../components/SiteLayout.tsx";
 import type { SiteData } from "../types/site.ts";
 
 export const data = {
-  title: "SEC Insiders",
+  title: "SEC Insider Trade Clusters",
   description:
-    "A project page for an automated SEC Form 4 pipeline that ingests filings, parses transaction-level rows, and detects insider trading clusters.",
+    "Project page for SEC Insider Trade Clusters - an automated SEC Form 4 pipeline that ingests filings, parses transaction-level rows, and detects insider trading clusters.",
 };
 
 type SecInsidersPageProps = {

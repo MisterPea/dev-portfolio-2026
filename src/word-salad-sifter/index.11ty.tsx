@@ -10,7 +10,7 @@ import type { SiteData } from "../types/site.ts";
 export const data = {
   title: "Word Salad Sifter",
   description:
-    "A project page for an AI-assisted system for extracting structured information from job postings.",
+    "Project page for Word Salad Sifter - an AI-assisted system for extracting structured information from job postings.",
 };
 
 type SchwabNodeProps = {

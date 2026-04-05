@@ -4,7 +4,7 @@ import type { SiteData } from "./types/site.ts";
 
 export const data = {
   title: "Home",
-  description: "A design-forward developer portfolio homepage with room for expressive formatting and custom layout.",
+  description: "Engineering portfolio of Perry Angelora. Building systems for data ingestion, financial APIs, and developer tooling — with an emphasis on user-centric, reusable design and clean architecture",
 };
 
 type HomePageProps = {
