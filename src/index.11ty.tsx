@@ -40,7 +40,7 @@ export function HomePage({ site }: HomePageProps) {
               aria-live="polite"
             ></div>
             <span className="landing-content">
-              <p>I'm currently reading <a href="https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/" rel="noreferrer" target="_blank">Designing Data-Intensive Applications</a>, 2nd Edition by Martin Kleppmann, Chris Riccomini</p>
+              <p>I'm currently reading <a href="https://www.penguinrandomhouse.com/books/565970/flash-crash-by-liam-vaughan/" rel="noreferrer" target="_blank">Flash Crash</a> — <i>A Trading Savant, a Global Manhunt, and the Most Mysterious Market Crash in History</i>, by Liam Vaughan</p>
             </span>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Colophon" isLandingPage >
