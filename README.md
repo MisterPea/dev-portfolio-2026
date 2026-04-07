@@ -1,5 +1,2 @@
 # Development Portfilio 2026 ✨🕺✨
 Created with .tsx as a templating language, CSS/SCSS for styling, vanilla TypeScript for interactions, and [11ty](https://www.11ty.dev) to pull it all together. Typography is set in the [Geist typeface](https://vercel.com/font). <br /><br />[Say hello](https://www.linkedin.com/in/perry-angelora/)!<br />
----
-<br />
-Site coded by hand with judicious use of coding agents for sanity-checking, test development, and bug hunting. All core architecture, implementation, and final code decisions were written and reviewed me.
