@@ -40,7 +40,7 @@ export function HomePage({ site }: HomePageProps) {
               aria-live="polite"
             ></div>
             <span className="landing-content">
-              <p>I'm currently reading <a href="https://www.penguinrandomhouse.com/books/565970/flash-crash-by-liam-vaughan/" rel="noreferrer" target="_blank">Flash Crash</a> — <i>A Trading Savant, a Global Manhunt, and the Most Mysterious Market Crash in History</i>, by Liam Vaughan</p>
+              <p>I'm currently reading <a href="https://academic.oup.com/book/52292" rel="noreferrer" target="_blank">Trading and Exchanges</a> - <i>Market Microstructure for Practitioners</i>, by Larry Harris</p>
             </span>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Colophon" isLandingPage >
