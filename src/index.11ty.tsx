@@ -18,6 +18,9 @@ export function HomePage({ site }: HomePageProps) {
         <article className="content-panel">
 
           <SectionSpacer sectionTitle="Selected Systems" isLandingPage >
+            <a className="landing-content" href="/hoop-state-gameflows">
+              <p><span className="underline-text">Hoop State Gameflows</span>: A visual, stats-first look at NBA games; their lineup rotations, score-margin trends, shot charts and more.</p>
+            </a>
             <a className="landing-content" href="/sec-insider-cluster">
               <p><span className="underline-text">SEC Insider Trade Clusters</span>: Automated pipeline for detecting clusters of insider sales and purchases from SEC Form 4 filings.</p>
             </a>

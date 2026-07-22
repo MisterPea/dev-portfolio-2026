@@ -9,6 +9,7 @@ const spotifyResponse = {
 };
 
 const projectRoutes = [
+  "/hoop-state-gameflows/",
   "/sec-insider-cluster/",
   "/word-salad-sifter/",
   "/sqlite-worker/",
@@ -29,6 +30,7 @@ test("home page renders key content and spotify module", async ({ page }) => {
   await page.goto("/");
 
   await expect(page).toHaveTitle(/Perry Angelora/i);
+  await expect(page.getByRole("link", { name: /Hoop State Gameflows/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /SEC Insider Trade Clusters/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Word Salad Sifter/i })).toBeVisible();
   await expect(page.locator(".spotify-data")).toContainText("Test Track");
