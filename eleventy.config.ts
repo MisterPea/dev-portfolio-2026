@@ -249,8 +249,8 @@ export default function (eleventyConfig: any) {
               <script>${colorSchemeBootstrapScript}</script>
               <script
                 defer
-                src="https://cloud.umami.is/script.js"
-                data-website-id="07d06a16-f4e2-4a87-b172-795bd49a620d"
+                src="https://analytics.misterpea.me/script.js"
+                data-website-id="7a3cb539-d00f-45f0-964f-08e5a254a163"
               ></script>
               <link rel="preload" href="/fonts/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
               <link rel="preload" href="/fonts/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
