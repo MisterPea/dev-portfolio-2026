@@ -132,6 +132,8 @@ const colorSchemeBootstrapScript = `
 })();
 `.trim();
 
+const criticalCss = sass.compile("src/style/variables.scss").css;
+
 // Takes a specified image and converts it to a webp.
 export default function (eleventyConfig: any) {
   for (const fontPath of FONT_ASSETS) {
@@ -229,6 +231,7 @@ export default function (eleventyConfig: any) {
               <meta name="theme-color" content="#ecebe7" media="(prefers-color-scheme: light)" />
               <meta name="theme-color" content="#302f2f" media="(prefers-color-scheme: dark)" />
               <link rel="manifest" href="/site.webmanifest" />
+              <style>${criticalCss}</style>
               <meta property="og:type" content="website" />
               <meta property="og:site_name" content="${escapeHtmlAttribute(siteTitle ?? "Portfolio")}" />
               <meta property="og:title" content="${escapeHtmlAttribute(pageTitle)}" />
@@ -249,7 +252,8 @@ export default function (eleventyConfig: any) {
                 src="https://cloud.umami.is/script.js"
                 data-website-id="07d06a16-f4e2-4a87-b172-795bd49a620d"
               ></script>
-              <link rel="stylesheet" href="/style/variables.css" />
+              <link rel="preload" href="/fonts/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+              <link rel="preload" href="/fonts/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
               <link rel="stylesheet" href="/style/main.css" />
               <script src="/js/main.js" defer></script>
             </head>

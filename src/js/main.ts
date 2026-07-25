@@ -4,7 +4,8 @@ import spotifyListening from "./spotifyListening.ts";
 const COLOR_SCHEME_STORAGE_KEY = "color-scheme";
 const STICKY_TAGLINE_HIDDEN_CLASS = "is-sticky-hidden";
 const STICKY_TAGLINE_BUFFER_MS = 50;
-const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+const HOVER_PRELOAD_DELAY_MS = 150;
+const colorSchemeQuery = window.matchMedia( "(prefers-color-scheme: dark)" );
 
 function logConsoleGreeting() {
   console.log(
@@ -36,9 +37,9 @@ function logConsoleGreeting() {
 
 function getStoredColorScheme() {
   try {
-    const value = window.localStorage.getItem(COLOR_SCHEME_STORAGE_KEY);
+    const value = window.localStorage.getItem( COLOR_SCHEME_STORAGE_KEY );
     return value === "light" || value === "dark" ? value : null;
-  } catch (_error) {
+  } catch ( _error ) {
     return null;
   }
 }
@@ -46,90 +47,90 @@ function getStoredColorScheme() {
 function getActiveColorScheme() {
   const storedColorScheme = getStoredColorScheme();
 
-  if (storedColorScheme) {
+  if ( storedColorScheme ) {
     return storedColorScheme;
   }
 
   return colorSchemeQuery.matches ? "dark" : "light";
 }
 
-function applyColorScheme(colorScheme: "light" | "dark" | null) {
-  if (colorScheme) {
+function applyColorScheme( colorScheme: "light" | "dark" | null ) {
+  if ( colorScheme ) {
     document.documentElement.dataset.colorScheme = colorScheme;
     return;
   }
 
-  document.documentElement.removeAttribute("data-color-scheme");
+  document.documentElement.removeAttribute( "data-color-scheme" );
 }
 
 function updateColorSchemeToggle() {
 
-  const toggle = document.querySelector<HTMLButtonElement>("[data-color-scheme-toggle]");
+  const toggle = document.querySelector<HTMLButtonElement>( "[data-color-scheme-toggle]" );
 
-  if (!toggle) {
+  if ( !toggle ) {
     return;
   }
 
   const activeColorScheme = getActiveColorScheme();
   const nextColorScheme = activeColorScheme === "dark" ? "light" : "dark";
 
-  toggle.classList.toggle("theme-toggle--toggled", activeColorScheme === "dark");
-  toggle.setAttribute("aria-pressed", String(activeColorScheme === "dark"));
-  toggle.setAttribute("aria-label", `Switch to ${nextColorScheme} mode`);
-  toggle.setAttribute("title", `Switch to ${nextColorScheme} mode`);
+  toggle.classList.toggle( "theme-toggle--toggled", activeColorScheme === "dark" );
+  toggle.setAttribute( "aria-pressed", String( activeColorScheme === "dark" ) );
+  toggle.setAttribute( "aria-label", `Switch to ${nextColorScheme} mode` );
+  toggle.setAttribute( "title", `Switch to ${nextColorScheme} mode` );
 }
 
 function initializeColorSchemeToggle() {
-  const toggle = document.querySelector<HTMLButtonElement>("[data-color-scheme-toggle]");
+  const toggle = document.querySelector<HTMLButtonElement>( "[data-color-scheme-toggle]" );
 
-  if (!toggle) {
+  if ( !toggle ) {
     return;
   }
 
-  applyColorScheme(getStoredColorScheme());
+  applyColorScheme( getStoredColorScheme() );
   updateColorSchemeToggle();
 
-  toggle.addEventListener("click", () => {
+  toggle.addEventListener( "click", () => {
     const nextColorScheme = getActiveColorScheme() === "dark" ? "light" : "dark";
 
     try {
-      window.localStorage.setItem(COLOR_SCHEME_STORAGE_KEY, nextColorScheme);
-    } catch (_error) {
+      window.localStorage.setItem( COLOR_SCHEME_STORAGE_KEY, nextColorScheme );
+    } catch ( _error ) {
       // Ignore storage access issues and still apply the theme for this page load.
     }
 
-    applyColorScheme(nextColorScheme);
+    applyColorScheme( nextColorScheme );
     updateColorSchemeToggle();
-  });
+  } );
 
-  colorSchemeQuery.addEventListener("change", () => {
-    if (getStoredColorScheme()) {
+  colorSchemeQuery.addEventListener( "change", () => {
+    if ( getStoredColorScheme() ) {
       return;
     }
 
-    applyColorScheme(null);
+    applyColorScheme( null );
     updateColorSchemeToggle();
-  });
+  } );
 }
 
 // Classlist manipulation for fade in/out of site tag
 function initializeStickyTagline() {
-  const tagline = document.querySelector<HTMLElement>(".site-tagline");
-  const siteTitle = document.querySelector<HTMLElement>(".site-title");
-  const siteMain = document.querySelector<HTMLElement>(".site-main");
-  const themeToggle = document.querySelector<HTMLElement>(".color-scheme-toggle");
+  const tagline = document.querySelector<HTMLElement>( ".site-tagline" );
+  const siteTitle = document.querySelector<HTMLElement>( ".site-title" );
+  const siteMain = document.querySelector<HTMLElement>( ".site-main" );
+  const themeToggle = document.querySelector<HTMLElement>( ".color-scheme-toggle" );
 
-  if (!tagline || !siteMain || !siteTitle || !themeToggle) {
+  if ( !tagline || !siteMain || !siteTitle || !themeToggle ) {
     return;
   }
   let hideTimeoutId: number | null = null;
 
   const clearHideTimeout = () => {
-    if (hideTimeoutId === null) {
+    if ( hideTimeoutId === null ) {
       return;
     }
 
-    window.clearTimeout(hideTimeoutId);
+    window.clearTimeout( hideTimeoutId );
     hideTimeoutId = null;
   };
 
@@ -140,43 +141,82 @@ function initializeStickyTagline() {
 
     const shouldHide = siteMain.getBoundingClientRect().top <= 80;
 
-    if (!shouldHide) {
+    if ( !shouldHide ) {
       clearHideTimeout();
-      tagline.classList.remove(STICKY_TAGLINE_HIDDEN_CLASS);
-      siteTitle.classList.remove(STICKY_TAGLINE_HIDDEN_CLASS);
-      themeToggle.classList.remove(STICKY_TAGLINE_HIDDEN_CLASS);
+      tagline.classList.remove( STICKY_TAGLINE_HIDDEN_CLASS );
+      siteTitle.classList.remove( STICKY_TAGLINE_HIDDEN_CLASS );
+      themeToggle.classList.remove( STICKY_TAGLINE_HIDDEN_CLASS );
       return;
     }
 
     if (
       hideTimeoutId !== null ||
-      tagline.classList.contains(STICKY_TAGLINE_HIDDEN_CLASS) ||
-      siteTitle.classList.contains(STICKY_TAGLINE_HIDDEN_CLASS) ||
-      themeToggle.classList.contains(STICKY_TAGLINE_HIDDEN_CLASS)
+      tagline.classList.contains( STICKY_TAGLINE_HIDDEN_CLASS ) ||
+      siteTitle.classList.contains( STICKY_TAGLINE_HIDDEN_CLASS ) ||
+      themeToggle.classList.contains( STICKY_TAGLINE_HIDDEN_CLASS )
     ) {
       return;
     }
 
-    hideTimeoutId = window.setTimeout(() => {
-      tagline.classList.add(STICKY_TAGLINE_HIDDEN_CLASS);
-      siteTitle.classList.add(STICKY_TAGLINE_HIDDEN_CLASS);
-      themeToggle.classList.add(STICKY_TAGLINE_HIDDEN_CLASS);
+    hideTimeoutId = window.setTimeout( () => {
+      tagline.classList.add( STICKY_TAGLINE_HIDDEN_CLASS );
+      siteTitle.classList.add( STICKY_TAGLINE_HIDDEN_CLASS );
+      themeToggle.classList.add( STICKY_TAGLINE_HIDDEN_CLASS );
       hideTimeoutId = null;
-    }, STICKY_TAGLINE_BUFFER_MS);
+    }, STICKY_TAGLINE_BUFFER_MS );
   };
 
   const queueStickyTaglineUpdate = () => {
-    if (frameId !== null) {
+    if ( frameId !== null ) {
       return;
     }
 
-    frameId = window.requestAnimationFrame(updateStickyTagline);
+    frameId = window.requestAnimationFrame( updateStickyTagline );
   };
 
-  window.addEventListener("scroll", queueStickyTaglineUpdate, { passive: true });
-  window.addEventListener("resize", queueStickyTaglineUpdate);
+  window.addEventListener( "scroll", queueStickyTaglineUpdate, { passive: true } );
+  window.addEventListener( "resize", queueStickyTaglineUpdate );
   queueStickyTaglineUpdate();
 }
+
+function preloadHref( href: string, preloadedHrefs: Set<string> ) {
+  if ( preloadedHrefs.has( href ) ) {
+    return;
+  }
+
+  preloadedHrefs.add( href );
+
+  const link = document.createElement( "link" );
+  link.rel = "prefetch";
+  link.href = href;
+  document.head.appendChild( link );
+}
+
+function addPreloadWatchers() {
+  const preloadElements = document.querySelectorAll<HTMLAnchorElement>( '[data-preload="true"]' );
+  const preloadedHrefs = new Set<string>();
+
+  for ( const element of preloadElements ) {
+    let hoverTimeoutId: number | null = null;
+
+    element.addEventListener( "mouseenter", () => {
+      console.log("ENTER")
+      hoverTimeoutId = window.setTimeout( () => {
+        hoverTimeoutId = null;
+        preloadHref( element.href, preloadedHrefs );
+      }, HOVER_PRELOAD_DELAY_MS );
+    } );
+
+    element.addEventListener( "mouseleave", () => {
+      console.log("LEAVE")
+      if ( hoverTimeoutId !== null ) {
+        window.clearTimeout( hoverTimeoutId );
+        hoverTimeoutId = null;
+      }
+    } );
+  }
+}
+
 
 function initializeSite() {
   initButtonEmail();
@@ -184,10 +224,11 @@ function initializeSite() {
   initializeStickyTagline();
   logConsoleGreeting();
   void spotifyListening();
+  addPreloadWatchers();
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initializeSite, { once: true });
+if ( document.readyState === "loading" ) {
+  document.addEventListener( "DOMContentLoaded", initializeSite, { once: true } );
 } else {
   initializeSite();
 }

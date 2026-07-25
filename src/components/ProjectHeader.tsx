@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import AnchorWithPreload from "./AnchorWithPreload";
 
 type ProjectHeaderLink = {
   href: string;
@@ -19,37 +20,37 @@ type ProjectHeaderProps = {
   children?: ReactNode;
 };
 
-export default function ProjectHeader({
+export default function ProjectHeader( {
   title,
   description,
   metaItems,
   links,
   children
-}: ProjectHeaderProps) {
+}: ProjectHeaderProps ) {
   return (
     <header className="project-header">
       <h2 className="project-header--title">{title}</h2>
       <div className="project-header--links">
-        {links.map((link) => (
-          <a
-            href={link.href}
+        {links.map( ( link ) => (
+          <AnchorWithPreload
             key={link.href}
-            rel="noreferrer"
-            target="_blank"
+            href={link.href}
+            isExternal
+            preload
             aria-label={`${link.label} (opens in a new tab)`}
           >
             <span aria-hidden="true">{link.icon}</span>
             <p>{link.label}</p>
-          </a>
-        ))}
+          </AnchorWithPreload>
+        ) )}
       </div>
       <p className="project-header--copy">{description}</p>
       <ul className="project-header--meta">
-        {metaItems.map((item) => (
+        {metaItems.map( ( item ) => (
           <li key={item.label}>
             <span className="underline-text">{item.label}</span>: {item.value}
           </li>
-        ))}
+        ) )}
       </ul>
       {children && <>{children}</>}
     </header>

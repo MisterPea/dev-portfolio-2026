@@ -1,3 +1,4 @@
+import AnchorWithPreload from "./components/AnchorWithPreload.tsx";
 import SectionSpacer from "./components/SectionSpacer.tsx";
 import SiteLayout from "./components/SiteLayout.tsx";
 import type { SiteData } from "./types/site.ts";
@@ -11,30 +12,30 @@ type HomePageProps = {
   site: SiteData;
 };
 
-export function HomePage({ site }: HomePageProps) {
+export function HomePage( { site }: HomePageProps ) {
+
   return (
     <SiteLayout site={site} currentPath="/">
       <section className="content-grid">
         <article className="content-panel">
-
           <SectionSpacer sectionTitle="Selected Systems" isLandingPage >
-            <a className="landing-content" href="/hoop-state-gameflows">
+            <AnchorWithPreload href="/hoop-state-gameflows" className="landing-content" preload>
               <p><span className="underline-text">Hoop State Gameflows</span>: A visual, stats-first look at NBA games; their lineup rotations, score-margin trends, shot charts and more.</p>
-            </a>
-            <a className="landing-content" href="/sec-insider-cluster">
+            </AnchorWithPreload>
+            <AnchorWithPreload href="/sec-insider-cluster" className="landing-content" preload>
               <p><span className="underline-text">SEC Insider Trade Clusters</span>: Automated pipeline for detecting clusters of insider sales and purchases from SEC Form 4 filings.</p>
-            </a>
-            <a className="landing-content" href="/word-salad-sifter">
+            </AnchorWithPreload>
+            <AnchorWithPreload href="/word-salad-sifter" className="landing-content" preload>
               <p><span className="underline-text">Word Salad Sifter</span>: AI-assisted system for extracting structured information from job postings.</p>
-            </a>
+            </AnchorWithPreload>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Tools" isLandingPage >
-            <a className="landing-content" href="/sqlite-worker">
+            <AnchorWithPreload href="/sqlite-worker" className="landing-content" preload>
               <p><span className="underline-text">sqlite-worker</span>: A concurrency-safe wrapper around better-sqlite3, isolating database operations to a background thread for Node.js applications.</p>
-            </a>
-            <a className="landing-content" href="/schwab-node">
+            </AnchorWithPreload>
+            <AnchorWithPreload href="/schwab-node" className="landing-content" preload>
               <p><span className="underline-text">schwab-node</span>: Unofficial TypeScript/Node.js SDK for authenticated market data and streaming data via the Charles Schwab API.</p>
-            </a>
+            </AnchorWithPreload>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Listening/Reading" isLandingPage >
             <div
@@ -52,9 +53,33 @@ export function HomePage({ site }: HomePageProps) {
             </p>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Links" isLandingPage >
-            <a className="landing-content outbound-link" title="View my GitHub" href="https://github.com/MisterPea" rel="noreferrer" target="_blank"><p><span className="underline-text" >GitHub</span></p></a>
-            <a className="landing-content outbound-link" title="View my CodePens" href="https://codepen.io/misterpea" rel="noreferrer" target="_blank"><p><span className="underline-text" >CodePen</span></p></a>
-            <a className="landing-content outbound-link" title="View my LinkedIn" href="https://www.linkedin.com/in/perry-angelora/" rel="noreferrer" target="_blank"><p><span className="underline-text" >LinkedIn</span></p></a>
+            <AnchorWithPreload
+              title="View my GitHub"
+              className="landing-content outbound-link"
+              href="https://github.com/MisterPea"
+              isExternal
+              preload
+            >
+              <p><span className="underline-text" >GitHub</span></p>
+            </AnchorWithPreload>
+            <AnchorWithPreload
+              className="landing-content outbound-link"
+              title="View my CodePens"
+              href="https://codepen.io/misterpea"
+              isExternal
+              preload
+            >
+              <p><span className="underline-text" >CodePen</span></p>
+            </AnchorWithPreload>
+            <AnchorWithPreload
+              className="landing-content outbound-link"
+              title="View my LinkedIn"
+              href="https://www.linkedin.com/in/perry-angelora/"
+              isExternal
+              preload
+            >
+              <p><span className="underline-text" >LinkedIn</span></p>
+            </AnchorWithPreload>
             <button
               className="landing-content outbound-email"
               title="Say Hi!"
