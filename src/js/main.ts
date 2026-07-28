@@ -4,7 +4,7 @@ import spotifyListening from "./spotifyListening.ts";
 const COLOR_SCHEME_STORAGE_KEY = "color-scheme";
 const STICKY_TAGLINE_HIDDEN_CLASS = "is-sticky-hidden";
 const STICKY_TAGLINE_BUFFER_MS = 50;
-const HOVER_PRELOAD_DELAY_MS = 150;
+const HOVER_PRELOAD_DELAY_MS = 175;
 const colorSchemeQuery = window.matchMedia( "(prefers-color-scheme: dark)" );
 
 function logConsoleGreeting() {
@@ -200,7 +200,6 @@ function addPreloadWatchers() {
     let hoverTimeoutId: number | null = null;
 
     element.addEventListener( "mouseenter", () => {
-      console.log("ENTER")
       hoverTimeoutId = window.setTimeout( () => {
         hoverTimeoutId = null;
         preloadHref( element.href, preloadedHrefs );
@@ -208,7 +207,6 @@ function addPreloadWatchers() {
     } );
 
     element.addEventListener( "mouseleave", () => {
-      console.log("LEAVE")
       if ( hoverTimeoutId !== null ) {
         window.clearTimeout( hoverTimeoutId );
         hoverTimeoutId = null;
