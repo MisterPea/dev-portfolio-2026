@@ -88,23 +88,37 @@ export function SecInsidersPage( { site }: SecInsidersPageProps ) {
       <SectionSpacer sectionTitle="Key Decisions" >
         <div className="project-section-wrapper">
           <p className="project-text-single">
-            The volume of data I process is staggering. For each season there are approximately 600,000 rows of data, with as many as 32 factors per row. That scale creates a few key decisions.
+            The volume of data I process is staggering. For each season there are approximately 600,000 rows of data, with as many as 32 factors per row. That scale necessitates several conscious technical and design decisions.
           </p>
           <div className="project-text-block">
-            <h3 className="underline-text">Balancing site speed and page weight</h3>
-            <p className="project-text-single">Instead of keeping a live SQLite database to hydrate pages at browse-time, I opted to pre-build pages. This eliminates the need for a Node.js server to operate the site and database, so I'm able to run a simple static website on S3 (and CloudFront).</p>
-            <div className="blank-divider" aria-hidden="true" ></div>
-            <h3 className="underline-text">Presenting the data clearly without overwhelming the user</h3>
-            <p className="project-text-single">With the amount and granularity of data I have, it's important to make every piece of it as useful as possible — opting for a comparison-based narrative that frames the adversarial nature of inter-team competition.</p>
-            <p className="project-text-single">Instead of treating each filing as a single event, the system splits each filing into transaction-level rows. This allows downstream analysis to focus on the individual aspects of the transaction.</p>
+            <ListItemBlock
+              underlineTitle
+              title="Balance page weight and performance"
+              elements={[
+              <>Serve pre-built pages instead of hydrating them at browse-time from a SQLite database; removing the Node.js server entirely and letting the site run as static files on S3 + CloudFront.</>,
+              <>Build-in micro enhancements like GPU acceleration, cacheable svg icons and aggressively-cached static pages.</>,
+            ]}
+            />
 
             <div className="blank-divider" aria-hidden="true" ></div>
+
+            <ListItemBlock
+              underlineTitle
+              title="Present the data clearly without overwhelming the user"
+              elements={[
+                <>Arrange sections hierarchically to present and compare data. We go from <i><b>stat vs. stat</b></i>, to <i><b>team vs. team</b></i>, to <i><b>player-level vs. player-level</b></i>.</>,
+                <>To minimize visual fatigue, we tried to keep all information scannable with additional info presented via mouse-overs.</>
+              ]}
+            />
+
+            <div className="blank-divider" aria-hidden="true" ></div>
+
             <InsertImage
               filename="hoopStateBars.png"
               class="project-content"
               alt="Bar chart example from a hard-fought win by the New York against Philadelphia"
             />
-            <p className="project-text-single image-caption">Bar charts to explain raw, numeric comparisons.</p>
+            <p className="project-text-single image-caption">Bar charts to allow stat vs. stat comparison</p>
           </div>
 
           <div className="blank-divider" aria-hidden="true" ></div>
@@ -115,7 +129,7 @@ export function SecInsidersPage( { site }: SecInsidersPageProps ) {
               class="project-content"
               alt="A score margin chart from a New York, Philadelphia game, showing several lead changes"
             />
-            <p className="project-text-single image-caption">A time-based score-margin chart paired with lineup plus/minus, to explain the push and pull of intra-game battles.</p>
+            <p className="project-text-single image-caption">Time-based score-margin chart paired with lineup plus/minus, to visualize the push and pull of intra-game battles.</p>
           </div>
 
           <div className="blank-divider" aria-hidden="true" ></div>
@@ -126,7 +140,7 @@ export function SecInsidersPage( { site }: SecInsidersPageProps ) {
               class="project-content"
               alt="Image of the shot charts from the Knicks win over the 76ers"
             />
-            <p className="project-text-single image-caption">Shot charts that give a visual representation of a court and where shots were made or missed, with the ability to filter shots by distance.</p>
+            <p className="project-text-single image-caption">Shot charts to give a cartographic view of where shots were made and missed, presenting a granular shot-by-shot visualization.</p>
           </div>
 
         </div>
