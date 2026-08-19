@@ -64,8 +64,8 @@ export function SecInsidersPage( { site }: SecInsidersPageProps ) {
           <ListItemBlock
             title="Ingest Layer"
             elements={[
-              <>The presentation layer is designed to be cleanly minimal, easy to browse and compare, and fast.</>,
-              <>Each game is pre-rendered into its own lightweight (~700KB) static webpage, eliminating API fetches and hydration lag while maximizing page-load speed and browser caching.</>,
+              <>The ingest layer runs every night during the NBA season, at the conclusion of the final game for the night.</>,
+              <>Gathering data from a trio of endpoints, we populate 5 SQLite tables with game data. From box scores to per-play game actions.</>,
             ]}
           />
           <ListItemBlock
