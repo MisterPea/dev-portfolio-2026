@@ -59,13 +59,19 @@ export function SecInsidersPage( { site }: SecInsidersPageProps ) {
       <SectionSpacer sectionTitle="System Outline" >
         <div className="project-section-wrapper">
           <p className="project-text-single">
-            The site is constructed in three parts: the Ingest Layer, the Presentation Layer, and the Orchestration Layer.
+            The site is constructed in three parts: the Orchestration Layer, the Ingest Layer, the Presentation Layer.
           </p>
+          <ListItemBlock
+            title="Orchestration Layer"
+            elements={[
+              <>Using a persistent macOS LaunchAgent, scripts are automatically executed every morning to poll the latest game data, build the game pages, test the build, and deploy the update.</>,
+            ]}
+          />
           <ListItemBlock
             title="Ingest Layer"
             elements={[
-              <>The ingest layer runs every night during the NBA season, at the conclusion of the final game for the night.</>,
-              <>Gathering data from a trio of endpoints, we populate 5 SQLite tables with game data. From box scores to per-play game actions.</>,
+              <>The ingest layer, triggered by the orchestration layer, is the data-gathering layer, using SQLite as a durable storage framework.</>,
+              <>Gathering data from a trio of endpoints, we populate 5 tables with game data. From box scores to per-play game actions.</>,
             ]}
           />
           <ListItemBlock
@@ -74,12 +80,6 @@ export function SecInsidersPage( { site }: SecInsidersPageProps ) {
               <>The presentation layer is designed to be cleanly minimal, easy to browse and compare, and fast.</>,
               <>Each game is pre-rendered into its own lightweight (~700KB) static webpage, eliminating API fetches and hydration lag while maximizing page-load speed and browser caching.</>,
               <>Chart components (bar chart, game-flow, shot chart) were built and tested in isolation via <a href="https://storybook.hoopstate.net" rel="noreferrer" target="_blank"><span className="underline-text">Storybook.js</span></a> before being wired into the static page templates.</>,
-            ]}
-          />
-          <ListItemBlock
-            title="Orchestration Layer"
-            elements={[
-              <>Using a persistent macOS LaunchAgent, scripts are automatically executed every morning to poll the latest game data, build the game pages, test the build, and deploy the update.</>,
             ]}
           />
         </div>
