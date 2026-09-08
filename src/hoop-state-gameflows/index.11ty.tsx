@@ -9,7 +9,7 @@ import type { SiteData } from "../types/site.ts";
 export const data = {
   title: "Hoop State Gameflows",
   description:
-    "Project page for SEC Insider Trade Clusters - an automated SEC Form 4 pipeline that ingests filings, parses transaction-level rows, and detects insider trading clusters.",
+    "Project page Hoop State Gameflows - a data-gathering and presentation framework that turns NBA game data into visual, contextual breakdowns.",
 };
 
 type SecInsidersPageProps = {

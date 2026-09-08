@@ -19,6 +19,9 @@ export function HomePage( { site }: HomePageProps ) {
       <section className="content-grid">
         <article className="content-panel">
           <SectionSpacer sectionTitle="Selected Systems" isLandingPage >
+            <AnchorWithPreload href="/linkfink" className="landing-content" preload>
+              <p><span className="underline-text">Linkfink</span>: A rebuild and refresh of an abandoned Chrome extension-based link extractor. Rewritten in TypeScript with updated features and styling.</p>
+            </AnchorWithPreload>
             <AnchorWithPreload href="/hoop-state-gameflows" className="landing-content" preload>
               <p><span className="underline-text">Hoop State Gameflows</span>: A visual, stats-first look at NBA games; their lineup rotations, score-margin trends, shot charts and more.</p>
             </AnchorWithPreload>
