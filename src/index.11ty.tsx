@@ -47,7 +47,7 @@ export function HomePage( { site }: HomePageProps ) {
               aria-live="polite"
             ></div>
             <span className="landing-content">
-              <p>I'm currently reading <a href="https://academic.oup.com/book/52292" rel="noreferrer" target="_blank">Trading and Exchanges</a> - <i>Market Microstructure for Practitioners</i>, by Larry Harris</p>
+              <p>I'm currently reading <a href="https://www.penguinrandomhouse.com/books/293976/storm-of-steel-by-ernst-junger-translated-with-an-introduction-by-michael-hofmann/" rel="noreferrer" target="_blank">Storm of Steel</a> by Ernst Jünger</p>
             </span>
           </SectionSpacer>
           <SectionSpacer sectionTitle="Colophon" isLandingPage >
